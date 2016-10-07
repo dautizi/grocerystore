@@ -1,0 +1,12 @@
+#set ($prev = $prevAdventure)
+#if (!$prev)
+    #set ($prev = $nextAdventure)
+#end
+<a class="prev ajax" href="$!{prev.articleUrl}"></a>
+<a class="back" href="#/portfolio"></a>
+
+#set ($next = $nextAdventure)
+#if (!$next)
+    #set ($next = $prevAdventure)
+#end
+<a class="next ajax" href="$!{next.articleUrl}"></a>

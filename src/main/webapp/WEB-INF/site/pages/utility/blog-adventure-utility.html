@@ -1,0 +1,77 @@
+<div class="tabs">
+    <ul class="tab-titles">
+        <li><a class="active">Blog</a></li>
+        <li><a>Adventure</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <!-- tab-1 -->
+        <div>
+            <div class="contact-form">
+                <form id="blog-form" class="validate-form" method="post" action="#">
+                    <input type="hidden" name="action" value="$!{utilityAction}" />
+                    <input type="hidden" name="type" value="blog" />
+
+                    <p>
+                        <label for="blogTitle">TITLE</label>
+                        <input type="text" name="title" id="blogTitle">
+                    </p>
+
+                    <p>
+                        <label for="blogId">ID</label>
+                        <input type="text" name="lastId" id="blogId" value="$!{blog.id}">
+                    </p>
+
+                    <p>
+                        <label for="blogNormalized">NORMALIZED</label>
+                        <input type="text" name="normalized" id="blogNormalized" value="$!{normalizedTitle}">
+                    </p>
+
+                    <p class="antispam">Leave this empty if you are a human :
+                        <br /><input name="url" />
+                    </p>
+
+                    <p>
+                        <button id="blog-form-submit">Generate</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+        <!-- tab-1 -->
+
+        <!-- tab-2 -->
+        <div>
+            <div class="contact-form">
+                <form id="adventure-form" class="validate-form" method="post" action="#">
+                    <input type="hidden" name="action" value="$!{utilityAction}" />
+                    <input type="hidden" name="type" value="adventure" />
+
+                    <p>
+                        <label for="adventureTitle">TITLE</label>
+                        <input type="text" name="title" id="adventureTitle">
+                    </p>
+
+                    <p>
+                        <label for="adventureId">ID</label>
+                        <input type="text" name="lastId" id="adventureId" value="$!{adventure.id}">
+                    </p>
+
+                    <p>
+                        <label for="adventureNormalized">NORMALIZED</label>
+                        <input type="text" name="normalized" id="adventureNormalized" value="$!{normalizedTitle}">
+                    </p>
+
+                    <p class="antispam">Leave this empty if you are a human :
+                        <br /><input name="url" />
+                    </p>
+
+                    <p>
+                        <button id="adventure-form-submit">Generate</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+        <!-- tab-2 -->
+    </div>
+</div>
+

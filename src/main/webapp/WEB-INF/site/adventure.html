@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js single-page-layout" data-mobile-classic-layout="true" data-classic-layout="false" data-prev-animation="16" data-next-animation="15" data-random-animation="false">
+<head>
+    #parse("includes/adventure/head.html")
+</head>
+<body>
+    <!-- PAGE -->
+    <div id="page" class="hfeed site">
+
+        <!-- HEADER -->
+        <header id="masthead" class="header" role="banner">
+            <a class="menu-toggle toggle-link"></a>
+            <h1 class="site-title mobile-title">DANIELE AUTIZI</h1>
+
+            <!-- header-wrap -->
+            <div class="header-wrap">
+                <img src="$!{config.staticBaseUrl}/images/site/avatar-cartoonized.png" alt="avatar">
+
+                <h1 class="site-title">DANIELE AUTIZI</h1>
+
+                <!-- NAV MENU -->
+                <nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+                    <div class="nav-menu" data-homepage-redirect="$!{config.baseUrl}">
+                        <ul>
+                            <li>
+                                <a href="#/home" class="homepage-redirect">
+                                <i class="pe-7s-home"></i>Home</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- NAV MENU -->
+
+                <!-- header-bottom -->
+                <div class="header-bottom">
+
+                    <!-- SOCIAL -->
+                    #parse("includes/social-list.html")
+                    <!-- SOCIAL -->
+
+                    <!-- copy-text -->
+                    <div class="copy-text">
+                        <p>&copy; 2016 Daniele Autizi</p>
+                    </div>
+                    <!-- copy-text -->
+
+                </div>
+                <!-- header-bottom -->
+
+            </div>
+            <!-- header-wrap -->
+
+        </header>
+        <!-- HEADER -->
+
+        <!-- .site-main -->
+        <div id="main" class="site-main">
+            <div class="portfolio-single page-layout">
+                <div class="layout-medium">
+                    <article class="hentry">
+                        <header class="entry-header">
+
+                            <!-- ADVENTURE-NAV -->
+                            #if ($prevAdventure || $nextAdventure)
+                                <div class="portfolio-nav">
+                                    #parse("includes/adventure/adventure-nav.html")
+                                </div>
+                            #end
+                            <!-- ADVENTURE-NAV -->
+
+                            <!-- TITLE -->
+                            <h1 class="entry-title">$!{adventure.title}</h1>
+                            <!-- TITLE -->
+                        </header>
+
+                        <div class="entry-content">
+                            #if ($adventure.staticUrl && $adventure.staticUrl != "")
+                                $remoteIncludeTool.get($adventure.staticUrl)
+                            #end
+
+                            <!-- ADVENTURE-NAV -->
+                            #if ($prevAdventure || $nextAdventure)
+                                <div class="portfolio-nav bottom">
+                                    #parse("includes/adventure/adventure-nav.html")
+                                </div>
+                            #end
+                            <!-- ADVENTURE-NAV -->
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <!-- .site-main -->
+
+    </div>
+    <!-- PAGE -->
+
+    <!-- PORTFOLIO SINGLE AJAX CONTENT CONTAINER -->
+    <div class="p-overlay"></div>
+    <div class="p-overlay"></div>
+
+    <!-- ALERT : used for contact form mail delivery alert -->
+    <div class="site-alert animated"></div>
+
+    #parse("logging/log.html")
+
+    #parse("includes/adventure/footer.html")
+</body>
+</html>

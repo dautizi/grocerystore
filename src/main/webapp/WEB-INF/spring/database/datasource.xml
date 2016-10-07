@@ -1,0 +1,29 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>#{contextParameters.datasourceConfigFile}</value>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${mysql.driverClassName}" />
+        <property name="url" value="${mysql.url}" />
+        <property name="username" value="${mysql.username}" />
+        <property name="password" value="${mysql.password}" />
+
+        <!-- 
+        <property name="maxActive" value="${mysql.maxActive}" />
+        <property name="maxIdle" value="${mysql.maxIdle}" />
+        <property name="maxWait" value="${mysql.maxWait}" />
+        <property name="removeAbandoned" value="${mysql.removeAbandoned}" />
+        <property name="removeAbandonedTimeout" value="${mysql.removeAbandonedTimeout}" />
+        <property name="logAbandoned" value="${mysql.logAbandoned}" />
+        <property name="defaultAutoCommit" value="${mysql.defaultAutoCommit}" />
+         -->
+    </bean>
+
+</beans>

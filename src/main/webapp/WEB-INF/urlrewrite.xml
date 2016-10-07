@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.0//EN" "http://tuckey.org/res/dtds/urlrewrite3.0.dtd">
+<urlrewrite>
+
+    <!-- google -->
+    <rule>
+        <from>^/(google2b17ae301e86d22e.html|danieleautizi.com.xml|robots.txt)$</from>
+        <to>/$1</to>
+    </rule>
+
+    <!-- graphic I level -->
+    <rule>
+        <from>^/(vendor|jquery-syntax-3.1.1|json|cv|js|css|img|images|fancybox|graphics|toolbox)/*</from>
+        <to>/$1/$2</to>
+    </rule>
+
+    <!-- Frontend [BEGIN] -->
+    <rule>
+        <from>^/$</from>
+        <to type="forward" last="true">/home</to>
+    </rule>
+    <!-- Frontend [END] -->
+
+    <rule>
+       <from>^(.*)$</from>
+       <to type="forward" last="true">/home/error?errorCode=404</to>
+    </rule>
+
+</urlrewrite>

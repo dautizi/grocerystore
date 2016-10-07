@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+    <context:component-scan base-package="com.grocerystore"></context:component-scan>
+
+    <util:properties id="systemPropertyFile" location="classpath:system.properties" />
+    <util:properties id="envPropertyFile" location="#{contextParameters.envConfigFile}" />
+    <util:properties id="datasourcePropertyFile" location="#{contextParameters.datasourceConfigFile}" />
+
+    <context:property-placeholder properties-ref="envPropertyFile" />
+    <context:property-placeholder properties-ref="datasourcePropertyFile" />
+
+    <mvc:annotation-driven />
+
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="it"/>
+    </bean>
+
+    <bean name="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:lang/messages" />
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="useCodeAsDefaultMessage" value="true" />
+    </bean>
+
+    <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="/WEB-INF/site/"/>
+        <property name="velocityProperties">
+            <props>
+                <prop key="input.encoding">utf-8</prop>
+                <prop key="output.encoding">utf-8</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".html"/>
+        <property name="contentType" value="text/html; charset=UTF-8"/>
+
+        <!-- if you want to use the Spring Velocity macros, set this property to true -->
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="dateToolAttribute" value="dateTool"/>
+        <property name="numberToolAttribute" value="numberTool"/>
+        <property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml"/>
+    </bean>
+
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="webContentInterceptor"/>
+            </list>
+        </property>
+
+        <property name="alwaysUseFullPath" value="true"/>
+        <property name="mappings">
+            <value>
+                /home=homeController
+
+                /home/error=errorController
+            </value>
+        </property>
+    </bean>
+
+    <bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+        <property name="cacheMappings">
+            <props>
+                <prop key="/adv**">900</prop>
+                <prop key="/socialPlugin**">900</prop>
+            </props>
+        </property>
+        <property name="cacheSeconds" value="60"/>
+        <property name="useExpiresHeader" value="true"/>
+        <property name="useCacheControlHeader" value="true"/>
+        <property name="useCacheControlNoStore" value="true"/>
+    </bean>
+
+    <import resource="spring/config-bean.xml"></import>
+
+    <!-- hibernate/datasource configuration -->
+    <import resource="spring/config/beans.xml"></import>
+
+    <bean name="homeController" class="com.grocerystore.controller.HomeController">
+        <property name="config" ref="configBean"/>
+        <property name="view" value="home"/>
+    </bean>
+
+    <bean name="errorController" class="com.grocerystore.controller.ErrorController">
+        <property name="config" ref="configBean"/>
+        <property name="view" value="error"/>
+    </bean>
+
+</beans>

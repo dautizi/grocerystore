@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js single-page-layout" data-mobile-classic-layout="true" data-classic-layout="false" data-prev-animation="16" data-next-animation="15" data-random-animation="false">
+<head>
+    #parse("includes/head-admin.html")
+</head>
+<body>
+    <!-- PAGE -->
+    <div id="page" class="hfeed site">
+
+        <!-- HEADER -->
+        <header id="masthead" class="header" role="banner">
+            <a class="menu-toggle toggle-link"></a>
+            <h1 class="site-title mobile-title">DANIELE AUTIZI</h1>
+
+            <!-- header-wrap -->
+            <div class="header-wrap">
+                <img src="$!{config.staticBaseUrl}/images/site/avatar-cartoonized.png" alt="avatar">
+
+                <h1 class="site-title">DANIELE AUTIZI</h1>
+
+                <!-- NAV MENU -->
+                <nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+                    <div class="nav-menu" data-homepage-redirect="$!{config.adminBaseUrl}">
+                        <ul>
+                            <li>
+                                <a href="#/home" class="homepage-redirect">
+                                    <i class="pe-7s-home"></i>Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#/mails" class="homepage-redirect">
+                                    <i class="pe-7s-mail-open-file"></i>Mails
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- NAV MENU -->
+
+                <!-- header-bottom -->
+                <div class="header-bottom">
+
+                    <!-- SOCIAL -->
+                    #parse("includes/social-list.html")
+                    <!-- SOCIAL -->
+
+                    <!-- copy-text -->
+                    <div class="copy-text">
+                        <p>&copy; 2016 Daniele Autizi</p>
+                    </div>
+                    <!-- copy-text -->
+
+                </div>
+                <!-- header-bottom -->
+
+            </div>
+            <!-- header-wrap -->
+
+        </header>
+        <!-- HEADER -->
+
+        <!-- .site-main -->
+        <div id="main" class="site-main">
+            <div class="blog-single page-layout">
+
+                <!-- .layout-fixed -->
+                <div class="layout-full">
+
+                    <!-- .hentry -->
+                    <article class="type-post hentry">
+                        <header class="entry-header">
+                            <h1 class="entry-title">Admin Panel</h1>
+
+                            <div class="entry-meta">
+                                <span class="entry-date">
+                                    <time class="entry-date" datetime="2014-07-13T04:34:10+00:00">April 13, 2015</time>
+                                </span> 
+                                <span class="comment-link">
+                                    <a href="blog-single.html#comments">7 Comments</a>
+                                </span>
+                                <span class="cat-links">
+                                    <a href="#" title="View all posts in Travel" rel="category tag">Travel</a>
+                                </span>
+                            </div>
+                        </header>
+
+                        <div class="entry-content">
+
+                            <!-- visit log -->
+                            <div>
+                                <h2>Mails</h2>
+
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <!-- .site-main -->
+
+    </div>
+    <!-- PAGE -->
+
+    <!-- PORTFOLIO SINGLE AJAX CONTENT CONTAINER -->
+    <div class="p-overlay"></div>
+    <div class="p-overlay"></div>
+
+    <!-- ALERT : used for contact form mail delivery alert -->
+    <div class="site-alert animated"></div>
+
+    #parse("logging/log.html")
+
+    #parse("includes/footer-admin.html")
+</body>
+</html>

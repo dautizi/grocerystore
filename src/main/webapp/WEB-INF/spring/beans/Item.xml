@@ -1,0 +1,16 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <!-- Stock business object -->
+    <bean id="itemBO" class="com.grocerystore.bo.impl.ItemBOImpl" >
+        <property name="itemDAO" ref="itemDAO" />
+    </bean>
+
+    <!-- Data Access Object -->
+    <bean id="itemDAO" class="com.grocerystore.dao.impl.ItemDAOImpl" >
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+</beans>

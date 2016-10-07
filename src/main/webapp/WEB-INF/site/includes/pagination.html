@@ -1,0 +1,12 @@
+#set ($url = "$!{adminBaseUrl}")
+#set ($p = $page)
+
+<div class="portfolio-nav bottom">
+    #if ($p && $p gt 1)
+        #set ($previousPage = $p - 1)
+        <a class="prev ajax" href="$!{url}?p=$!{previousPage}"></a>
+    #end
+
+    #set ($nextPage = $p + 1)
+    <a class="next ajax" href="$!{url}?p=$!{nextPage}"></a>
+</div>

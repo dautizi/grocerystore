@@ -1,0 +1,61 @@
+<section id="adventures" class="pt-page page-layout portfolio adventures">
+<!-- .content -->
+<div class="content">
+    <!-- .layout-medium -->
+    <div class="layout-medium">
+        <!-- page-title -->
+        <h1 class="page-title">
+            <i class="pe-7s-world"></i>my adventures
+        </h1>
+        <!-- page-title -->
+
+        <!--FILTERS-->
+        <ul id="filters" class="filters">
+            <li class="current">
+                <a href="#" data-filter="*">all</a>
+            </li>
+
+            #if ($adventureTypes && $adventureTypes.size() gt 0)
+                #foreach ($type in $adventureTypes)
+                    <li>
+                        <a href="#" data-filter=".$!{type.adventureType}">$!{type.adventureType}</a>
+                    </li>
+                #end
+            #end
+        </ul>
+        <!--FILTERS-->
+
+        <!-- ADVENTURES -->
+        <div class="portfolio-items media-grid masonry" data-layout="masonry" data-item-width="340">
+            #if ($adventures && $adventures.size() gt 0)
+                #foreach ($adventure in $adventures)
+                    <!-- adventure-item -->
+                    <div class="$!{adventure.cssClass}">
+                        <div class="media-box">
+                            <img src="$!{adventure.image}" alt="$!{adventure.altImage}">
+                            <div class="mask"></div>
+
+                            #set ($media = $adventure.media)
+                            #if ($media && $media.size() gt 0) 
+                                #foreach ($m in $media)
+                                    <a href="$!{m.mediaUrl}" class="$!{adventure.mediaCssClass}" title="$!{m.title}" ></a>
+                                #end
+                            #else
+                                <a href="$!{adventure.articleUrl}" class="$!{adventure.mediaCssClass}"></a>
+                            #end
+                        </div>
+
+                        <div class="media-cell-desc">
+                            <h3>$!{adventure.title}</h3>
+                            <p class="category">$!{adventure.category}</p>
+                        </div>
+                    </div>
+                #end
+            #end
+        </div>
+        <!-- PORTFOLIO -->
+    </div>
+    <!-- .layout-medium -->
+</div>
+<!-- .content -->
+</section>

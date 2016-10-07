@@ -1,0 +1,30 @@
+<div class="contact-form">
+    <form id="contact-form" class="validate-form" method="post" action="mailing">
+        <!-- enter mail subject here -->
+        <input type="hidden" name="subject" id="subject" value="New Message">
+        <input type="hidden" name="ipSender" id="ipSender">
+
+        <p>
+            <label for="name">NAME</label>
+            <input type="text" name="name" id="name" class="required">
+        </p>
+
+        <p>
+            <label for="email">EMAIL</label>
+            <input type="text" name="email" id="email" class="required email">
+        </p>
+
+        <p class="antispam">Leave this empty if you are a human :
+            <br /><input name="url" />
+        </p>
+
+        <p>
+            <label for="message">MESSAGE</label>
+            <textarea name="message" id="message" class="required"></textarea>
+        </p>
+
+        <p>
+            <button class="submit button">Send</button>
+        </p>
+    </form>
+</div>

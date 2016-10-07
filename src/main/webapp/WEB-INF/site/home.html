@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js one-page-layout" data-mobile-classic-layout="true" data-classic-layout="false" data-prev-animation="16" data-next-animation="15" data-random-animation="false">
+<head>
+    #parse("includes/head.html")
+</head>
+<body>
+    <!-- PAGE -->
+    <div id="page" class="hfeed site">
+
+        <!-- HEADER -->
+        <header id="masthead" class="header" role="banner">
+            <a class="menu-toggle toggle-link"></a>
+            <h1 class="site-title mobile-title">DANIELE AUTIZI</h1>
+
+            <!-- header-wrap -->
+            <div class="header-wrap">
+                <img src="$!{config.staticBaseUrl}/images/site/avatar-cartoonized.png" alt="avatar">
+
+                <h1 class="site-title">DANIELE AUTIZI</h1>
+
+                <!-- NAV MENU -->
+                <nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+                    <div class="nav-menu">
+                        <ul>
+                            <li>
+                                <a href="#/home">
+                                <i class="pe-7s-home"></i>Home</a>
+                            </li>
+                            <li>
+                                <a href="#/about">
+                                    <i class="pe-7s-user"></i>About Me</a>
+                            </li>
+                            <li>
+                                <a href="#/resume">
+                                    <i class="pe-7s-id"></i>Resume</a>
+                            </li>
+                            <li>
+                                <a href="#/adventures">
+                                    <i class="pe-7s-map-2"></i>Adventures</a>
+                            </li>
+                            <!-- 
+                            <li>
+                                <a href="#/blog">
+                                    <i class="pe-7s-notebook"></i>Blog</a>
+                            </li>
+                             -->
+                            <li>
+                                <a href="#/contact">
+                                    <i class="pe-7s-call"></i>Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- NAV MENU -->
+
+                <!-- SEARCH --> 
+                #parse("includes/search-form.html")
+                <!-- SEARCH -->
+
+                <!-- header-bottom -->
+                <div class="header-bottom">
+
+                    <!-- SOCIAL -->
+                    #parse("includes/social-list.html")
+                    <!-- SOCIAL -->
+
+                    <!-- copy-text -->
+                    <div class="copy-text">
+                        <p>&copy; 2016 Daniele Autizi</p>
+                    </div>
+                    <!-- copy-text -->
+
+                </div>
+                <!-- header-bottom -->
+
+            </div>
+            <!-- header-wrap -->
+
+        </header>
+        <!-- HEADER -->
+
+        <!-- .site-main -->
+        <div id="main" class="site-main"> <!-- PAGE : HOME -->
+            <section id="home" class="pt-page page-layout light-text home-section has-bg-img" style="background-image:url($!{config.staticBaseUrl}/images/site/homepage.jpg)">
+                <!-- .content -->
+                <div class="content">
+                    <!-- .layout-medium -->
+                    <div class="layout-medium">
+                        <h4>Hi, I am</h4>
+                        <h2>Daniele Autizi</h2>
+                        <h4>I am <strong id="typist-element" data-typist="an adventurer., a football lover., a dreamer.">a software engineer.</strong></h4>
+                    </div>
+                    <!-- .layout-medium -->
+                </div>
+                <!-- .content -->
+            </section>
+            <!-- PAGE : HOME -->
+
+            <!-- PAGE : ABOUT -->
+            #parse("pages/about-me.html")
+            <!-- PAGE : ABOUT -->
+
+            <!-- PAGE : RESUME -->
+            #parse("pages/resume.html")
+            <!-- PAGE : RESUME -->
+
+            <!-- PAGE : ADVENTURES -->
+            #parse("pages/adventures.html")
+            <!-- PAGE : ADVENTURES -->
+
+            <!-- PAGE : BLOG -->
+            #parse("pages/blog.html")
+            <!-- PAGE : BLOG -->
+
+            <!-- PAGE : CONTACT -->
+            #parse("pages/contact.html")
+            <!-- PAGE : CONTACT -->
+        </div>
+        <!-- .site-main -->
+
+    </div>
+    <!-- PAGE -->
+
+    <!-- PORTFOLIO SINGLE AJAX CONTENT CONTAINER -->
+    <div class="p-overlay"></div>
+    <div class="p-overlay"></div>
+
+    <!-- ALERT : used for contact form mail delivery alert -->
+    <div class="site-alert animated"></div>
+
+    #parse("logging/log.html")
+
+    #parse("includes/footer.html")
+</body>
+</html>
