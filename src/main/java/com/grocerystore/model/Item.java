@@ -5,11 +5,13 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Digits;
@@ -101,7 +103,8 @@ public class Item implements Serializable {
     @Column(name = "tag", nullable = true)
     private String tag;
 
-    @Transient
+    // One to Many mapping using List
+    @OneToMany(mappedBy="item", cascade=CascadeType.ALL)
     private List<ItemImage> images;
 
     @Override

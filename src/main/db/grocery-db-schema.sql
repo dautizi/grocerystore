@@ -47,7 +47,8 @@ media_path varchar(100),
 media_url varchar(200),
 prg int DEFAULT '1',
 status int DEFAULT '1',
-PRIMARY KEY (id));
+PRIMARY KEY (id),
+FOREIGN KEY (id_item) REFERENCES item(id));
 
 -- Shopping cart
 DROP TABLE IF EXISTS shopping_cart;
