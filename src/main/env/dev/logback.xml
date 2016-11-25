@@ -20,7 +20,7 @@
   </appender>
   <appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
       <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${catalinaHome}/logs/tempo-libero.back.log</fileNamePattern>
+      <fileNamePattern>${catalinaHome}/logs/grocerystore.back.log</fileNamePattern>
       <maxHistory>30</maxHistory>
     </rollingPolicy>
     <encoder>

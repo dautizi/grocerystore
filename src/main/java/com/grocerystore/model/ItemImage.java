@@ -1,10 +1,7 @@
 package com.grocerystore.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,11 +12,15 @@ import javax.validation.constraints.Size;
 @Table(name="image_item")
 public class ItemImage {
 
-    private static final long serialVersionUID = -7988799579036225110L;
-
     @Id
     @Column(name="id", unique=true, nullable=false)
     private long id;
+
+    @Column(name = "id_item", columnDefinition="long default '0'", nullable=false)
+    private long idItem;
+
+    @Column(name = "id_image", columnDefinition="long default '0'", nullable=false)
+    private long idImage;
 
     @Size(min=3, max=150)
     @Column(name = "title", nullable = false)
@@ -51,8 +52,8 @@ public class ItemImage {
     @Column(name = "status", nullable = false, columnDefinition="int default '1'")
     private int status; // default 1
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="images") // id_item as foreign key
+    @ManyToOne
+    @JoinColumn(name="id", referencedColumnName="id", insertable=false, updatable=false)
     private Item item;
 
     public long getId() {
@@ -115,14 +116,25 @@ public class ItemImage {
     public void setItem(Item item) {
         this.item = item;
     }
+    public long getIdItem() {
+        return idItem;
+    }
+    public void setIdItem(long idItem) {
+        this.idItem = idItem;
+    }
+    public long getIdImage() {
+        return idImage;
+    }
+    public void setIdImage(long idImage) {
+        this.idImage = idImage;
+    }
 
     @Override
     public String toString() {
-        return "ItemImage [id=" + id + ", title=" + title + ", alt=" + alt
-                + ", cssClass=" + cssClass + ", mediaType=" + mediaType
-                + ", mediaPath=" + mediaPath + ", mediaUrl=" + mediaUrl
-                + ", prg=" + prg + ", status=" + status + ", item=" + item
-                + "]";
+        return "ItemImage [id=" + id + ", idItem=" + idItem + ", idImage="
+                + idImage + ", title=" + title + ", alt=" + alt + ", cssClass="
+                + cssClass + ", mediaType=" + mediaType + ", mediaPath="
+                + mediaPath + ", mediaUrl=" + mediaUrl + ", prg=" + prg
+                + ", status=" + status + ", item=" + item + "]";
     }
-
 }

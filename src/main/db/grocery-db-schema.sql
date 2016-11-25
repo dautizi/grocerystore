@@ -23,15 +23,87 @@ nutritional_image varchar(200),
 availability int DEFAULT '1',
 next_availability datetime DEFAULT NULL,
 full_price decimal(10,2),
-discount boolean DEFAULT FALSE,
+created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at timestamp DEFAULT CURRENT_TIMESTAMP,
+status int DEFAULT '1',
+tag varchar(200),
+PRIMARY KEY (id));
+
+-- Customer
+DROP TABLE IF EXISTS customer;
+CREATE TABLE customer (
+id bigint AUTO_INCREMENT NOT NULL,
+email varchar(80) NOT NULL,
+email_verification boolean DEFAULT FALSE,
+username varchar(40),
+password varchar(255),
+name varchar(40),
+surname varchar(50),
+birthday int DEFAULT '0',
+birthmonth int DEFAULT '0',
+birthyear int DEFAULT '0',
+age int DEFAULT '0',
+birth_location varchar(50),
+birth_country varchar(50),
+mobile_phone varchar(20),
+phone varchar(20),
+fax varchar(20),
+country varchar(50),
+visits int DEFAULT '0',
+transactions int DEFAULT '0',
+signup_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at timestamp DEFAULT CURRENT_TIMESTAMP,
+status int DEFAULT '1',
+PRIMARY KEY (id));
+
+-- Discount
+DROP TABLE IF EXISTS discount;
+CREATE TABLE discount (
+id bigint AUTO_INCREMENT NOT NULL,
+name varchar(50),
+description varchar(20),
+cover varchar(200),
 discount_perc int,
-discount_price decimal(10,2),
+min_money decimal(10,2),
+max_saved_money decimal(10,2),
 discount_from datetime DEFAULT NULL,
 discount_to datetime DEFAULT NULL,
 created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 updated_at timestamp DEFAULT CURRENT_TIMESTAMP,
 status int DEFAULT '1',
-tag varchar(200),
+PRIMARY KEY (id));
+
+-- Item's discount
+DROP TABLE IF EXISTS item_discount;
+CREATE TABLE item_discount (
+id_item bigint NOT NULL,
+id_discount bigint NOT NULL,
+status int DEFAULT '1',
+PRIMARY KEY (id_item, id_discount),
+FOREIGN KEY (id_item) REFERENCES item(id),
+FOREIGN KEY (id_discount) REFERENCES discount(id));
+
+-- Customer's discount
+DROP TABLE IF EXISTS customer_discount;
+CREATE TABLE customer_discount (
+id_customer bigint NOT NULL,
+id_discount bigint NOT NULL,
+status int DEFAULT '1',
+PRIMARY KEY (id_customer, id_discount),
+FOREIGN KEY (id_customer) REFERENCES customer(id),
+FOREIGN KEY (id_discount) REFERENCES discount(id));
+
+-- Image
+DROP TABLE IF EXISTS image;
+CREATE TABLE image (
+id bigint AUTO_INCREMENT NOT NULL,
+title varchar(150),
+media_type varchar(20),
+abs_path varchar(200),
+extension varchar(5),
+created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at timestamp DEFAULT CURRENT_TIMESTAMP,
+status int DEFAULT '1',
 PRIMARY KEY (id));
 
 -- Item's images
@@ -39,6 +111,7 @@ DROP TABLE IF EXISTS image_item;
 CREATE TABLE image_item (
 id bigint AUTO_INCREMENT NOT NULL,
 id_item bigint NOT NULL,
+id_image bigint NOT NULL,
 title varchar(150),
 alt varchar(100),
 css_class varchar(100),
@@ -48,6 +121,7 @@ media_url varchar(200),
 prg int DEFAULT '1',
 status int DEFAULT '1',
 PRIMARY KEY (id),
+FOREIGN KEY (id_image) REFERENCES image(id),
 FOREIGN KEY (id_item) REFERENCES item(id));
 
 -- Shopping cart
@@ -115,39 +189,12 @@ UNIQUE INDEX (id_item, id_customer_order),
 FOREIGN KEY (id_customer_order) REFERENCES customer_order(id),
 FOREIGN KEY (id_item) REFERENCES item(id));
 
--- Customer
-DROP TABLE IF EXISTS customer;
-CREATE TABLE customer (
-id bigint AUTO_INCREMENT NOT NULL,
-email varchar(80) NOT NULL,
-email_verification boolean DEFAULT FALSE,
-username varchar(40),
-password varchar(255),
-name varchar(40),
-surname varchar(50),
-birthday int DEFAULT '0',
-birthmonth int DEFAULT '0',
-birthyear int DEFAULT '0',
-age int DEFAULT '0',
-birth_location varchar(50),
-birth_country varchar(50),
-mobile_phone varchar(20),
-phone varchar(20),
-fax varchar(20),
-country varchar(50),
-visits int DEFAULT '0',
-transactions int DEFAULT '0',
-signup_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-updated_at timestamp DEFAULT CURRENT_TIMESTAMP,
-status int DEFAULT '1',
-PRIMARY KEY (id));
-
 -- Address
 DROP TABLE IF EXISTS address;
 CREATE TABLE address (
 id bigint AUTO_INCREMENT NOT NULL,
-id_customer bigint DEFAULT NULL,
-address_type int DEFAULT '0',
+id_customer bigint NOT NULL,
+address_type int DEFAULT '1',
 same_address boolean DEFAULT FALSE,
 customer_default boolean DEFAULT FALSE,
 address_1 varchar(80),
@@ -161,7 +208,8 @@ created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 updated_at timestamp DEFAULT CURRENT_TIMESTAMP,
 status int DEFAULT '1',
 PRIMARY KEY (id),
-FOREIGN KEY (id_customer) REFERENCES customer(id));
+KEY fk_customer (id_customer),
+CONSTRAINT fk_customer FOREIGN KEY (id_customer) REFERENCES customer (id));
 
 -- Shipping Company
 DROP TABLE IF EXISTS shipping_company;

@@ -2,44 +2,92 @@ package com.grocerystore.model;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Type;
+
+@Entity
+@Table(name="credit_card")
 public class CreditCard {
 
-    private Integer id;
-    private Integer idCustomer;
+    @Id
+    @Column(name="id", unique=true, nullable=false)
+    private long id;
+
+    @Column(name="id_customer", columnDefinition="long default '0'")
+    private long idCustomer;
+
+    @Size(max=50)
+    @Column(name="brand", nullable=false)
     private String brand;
+    
+    @Size(max=50)
+    @Column(name="description", nullable=false)
     private String description;
+
+    @Column(name="prg", nullable=false, columnDefinition="int default '1'")
     private int prg;
+
+    @Size(max=30)
+    @Column(name="cc_code", nullable=false)
     private String ccCode;
+
+    @Column(name="security_code", nullable=false, columnDefinition="int default '0'")
     private int securityCode;
+
+    @Size(max=50)
+    @Column(name="holder_name", nullable=false)
     private String holderName;
+
+    @Size(max=10)
+    @Column(name="expire_date", nullable=false)
     private String expireDate;
+
+    @Column(name="expire_month", nullable=false, columnDefinition="int default '0'")
     private int expireMonth;
+
+    @Column(name="expire_year", nullable=false, columnDefinition="int default '0'")
     private int expireYear;
+
+    @Column(name="expired", columnDefinition = "boolean default false", nullable=false)
     private boolean expired;
+
+    @Column(name="validated", columnDefinition = "boolean default false", nullable=false)
     private boolean validated;
 
+    @Type(type="timestamp")
+    @Column(name="created_at", nullable=true)
     private Timestamp createdAt;
+    @Transient
     private String    createdAtFormat;
 
+    @Type(type="timestamp")
+    @Column(name="updated_at", nullable=true)
     private Timestamp updatedAt;
+    @Transient
     private String    updatedAtFormat;
 
-    // default '1'
+    @Column(name="status", nullable=false, columnDefinition="int default '1'")
     private int status;
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Integer getIdCustomer() {
+    public long getIdCustomer() {
         return idCustomer;
     }
 
-    public void setIdCustomer(Integer idCustomer) {
+    public void setIdCustomer(long idCustomer) {
         this.idCustomer = idCustomer;
     }
 

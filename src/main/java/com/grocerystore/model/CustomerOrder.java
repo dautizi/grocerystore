@@ -2,41 +2,86 @@ package com.grocerystore.model;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Type;
+
+@Entity
+@Table(name="customer_order")
 public class CustomerOrder {
 
-    private Integer id;
-    private Integer idShoppingCart;
+    @Id
+    @Column(name="id", unique=true, nullable=false)
+    private long id;
+
+    @Column(name = "id_shopping_cart", columnDefinition = "long default '0'")
+    private long idShoppingCart;
+
+    @Column(name = "total_items", nullable=false, columnDefinition="int default '0'")
     private int totalItems;
+
+    @Digits(integer=10, fraction=2)
+    @Column(name = "full_price", nullable = false)
     private BigDecimal fullPrice;
+
+    @Digits(integer=10, fraction=2)
+    @Column(name = "paid_price", nullable = false)
     private BigDecimal paidPrice;
 
+    @Type(type="timestamp")
+    @Column(name = "created_at", nullable=true)
     private Timestamp createdAt;
+    @Transient
     private String    createdAtFormat;
 
+    @Type(type="timestamp")
+    @Column(name = "updated_at", nullable=true)
     private Timestamp updatedAt;
+    @Transient
     private String    updatedAtFormat;
 
-    // default '1'
+    @Column(name = "status", nullable=false, columnDefinition="int default '1'")
     private int status;
 
+    @Size(max=20)
+    @Column(name = "customer_ip", nullable=true)
     private String customerIp;
+
+    @Size(max=20)
+    @Column(name = "customer_proxy", nullable=true)
     private String customerProxy;
-    private Integer customerId;
 
-    private List<CustomerOrderItem> items;
+    @Column(name = "customer_id", columnDefinition="long default '0'", nullable=false)
+    private long customerId;
 
-    public Integer getId() {
+    @ManyToOne
+    @JoinColumn(name="id", referencedColumnName="id", insertable=false, updatable=false)
+    private Customer customer;
+
+    @OneToMany(mappedBy="customerOrder", targetEntity=CustomerOrderItem.class)
+    private Set<CustomerOrderItem> items;
+
+    public long getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
-    public Integer getIdShoppingCart() {
+    public long getIdShoppingCart() {
         return idShoppingCart;
     }
-    public void setIdShoppingCart(Integer idShoppingCart) {
+    public void setIdShoppingCart(long idShoppingCart) {
         this.idShoppingCart = idShoppingCart;
     }
     public int getTotalItems() {
@@ -99,29 +144,24 @@ public class CustomerOrder {
     public void setCustomerProxy(String customerProxy) {
         this.customerProxy = customerProxy;
     }
-    public Integer getCustomerId() {
+    public long getCustomerId() {
         return customerId;
     }
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(long customerId) {
         this.customerId = customerId;
     }
-    public List<CustomerOrderItem> getItems() {
+    public Set<CustomerOrderItem> getItems() {
         return items;
     }
-    public void setItems(List<CustomerOrderItem> items) {
+    public void setItems(Set<CustomerOrderItem> items) {
         this.items = items;
     }
-
-    @Override
-    public String toString() {
-        return "CustomerOrder [id=" + id + ", idShoppingCart=" + idShoppingCart
-                + ", totalItems=" + totalItems + ", fullPrice=" + fullPrice
-                + ", paidPrice=" + paidPrice + ", createdAt=" + createdAt
-                + ", createdAtFormat=" + createdAtFormat + ", updatedAt="
-                + updatedAt + ", updatedAtFormat=" + updatedAtFormat
-                + ", status=" + status + ", customerIp=" + customerIp
-                + ", customerProxy=" + customerProxy + ", customerId="
-                + customerId + ", items=" + items + "]";
+    public Customer getCustomer() {
+        return customer;
     }
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
 
 }

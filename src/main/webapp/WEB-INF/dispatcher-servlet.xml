@@ -15,8 +15,8 @@
     <context:component-scan base-package="com.grocerystore"></context:component-scan>
 
     <util:properties id="systemPropertyFile" location="classpath:system.properties" />
-    <util:properties id="envPropertyFile" location="#{contextParameters.envConfigFile}" />
-    <util:properties id="datasourcePropertyFile" location="#{contextParameters.datasourceConfigFile}" />
+    <util:properties id="envPropertyFile" location="classpath:env.properties" />
+    <util:properties id="datasourcePropertyFile" location="classpath:datasource.properties" />
 
     <context:property-placeholder properties-ref="envPropertyFile" />
     <context:property-placeholder properties-ref="datasourcePropertyFile" />

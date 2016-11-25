@@ -2,20 +2,55 @@ package com.grocerystore.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.Digits;
+
+@Entity
+@Table(name="customer_order_item")
 public class CustomerOrderItem {
 
+    @Id
+    @Column(name="id", unique=true, nullable=false)
     private Integer idCustomerOrder;
-    private Integer idItem;
+
+    @Column(name = "id_item", columnDefinition = "long default '0'")
+    private long idItem;
+
+    @Column(name = "quantity", nullable=false, columnDefinition="int default '0'")
     private int quantity;
+
+    @Digits(integer=10, fraction=2)
+    @Column(name = "full_price", nullable=false)
     private BigDecimal fullPrice;
+
+    @Column(name = "discount", columnDefinition = "boolean default false", nullable=false)
     private boolean discount;
+
+    @Column(name = "discount_perc", nullable=false, columnDefinition="int default '1'")
     private int discountPerc;
+
+    @Digits(integer=10, fraction=2)
+    @Column(name = "discount_price", nullable=true)
     private BigDecimal discountPrice;
+
+    @Digits(integer=10, fraction=2)
+    @Column(name = "paid_price", nullable=false)
     private BigDecimal paidPrice;
 
-    // default '1'
+    @Column(name = "status", nullable=false, columnDefinition="int default '1'")
     private int status;
 
+    @ManyToOne
+    @JoinColumn(name="id", referencedColumnName="id", insertable=false, updatable=false)
+    private CustomerOrder customerOrder;
+
+    @Transient
     private Item item;
 
     public Integer getIdCustomerOrder() {
@@ -24,10 +59,10 @@ public class CustomerOrderItem {
     public void setIdCustomerOrder(Integer idCustomerOrder) {
         this.idCustomerOrder = idCustomerOrder;
     }
-    public Integer getIdItem() {
+    public long getIdItem() {
         return idItem;
     }
-    public void setIdItem(Integer idItem) {
+    public void setIdItem(long idItem) {
         this.idItem = idItem;
     }
     public int getQuantity() {
@@ -78,15 +113,11 @@ public class CustomerOrderItem {
     public void setItem(Item item) {
         this.item = item;
     }
-
-    @Override
-    public String toString() {
-        return "CustomerOrderItem [idCustomerOrder=" + idCustomerOrder
-                + ", idItem=" + idItem + ", quantity=" + quantity
-                + ", fullPrice=" + fullPrice + ", discount=" + discount
-                + ", discountPerc=" + discountPerc + ", discountPrice="
-                + discountPrice + ", paidPrice=" + paidPrice + ", status="
-                + status + "]";
+    public CustomerOrder getCustomerOrder() {
+        return customerOrder;
+    }
+    public void setCustomerOrder(CustomerOrder customerOrder) {
+        this.customerOrder = customerOrder;
     }
 
 }

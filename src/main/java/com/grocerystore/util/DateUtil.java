@@ -60,6 +60,14 @@ public class DateUtil {
         return millis;
     }
 
+    public static Timestamp getTimestampNow() {
+        return new Timestamp(System.currentTimeMillis());
+    }
+
+    public static Timestamp getTimestampTomorrow() {
+        return new Timestamp(System.currentTimeMillis());
+    }
+
     public static String convertDateStringFormat(String viewFormattedDate, String outgoingPattern){
         String formattedDate = null;
         SimpleDateFormat outgoingDateFormat = new SimpleDateFormat(outgoingPattern);
@@ -99,7 +107,6 @@ public class DateUtil {
     public static Calendar convertStringToCalendar(String strDate,
         String pattern) {
         Calendar c = null;
-
         try {
             Date d = convertStringToDate(pattern, strDate);
             c = new GregorianCalendar();
@@ -107,7 +114,6 @@ public class DateUtil {
         } catch (ParseException pe) {
             pe.printStackTrace();
         }
-
         return c;
     }
 
@@ -119,17 +125,14 @@ public class DateUtil {
      *
      * @throws ParseException
      */
-    public static Timestamp convertStringToTimestamp(String strTs,
-        String pattern) throws ParseException {
+    public static Timestamp convertStringToTimestamp(String strTs, String pattern) throws ParseException {
         Timestamp t = null;
-
         try {
             t = new Timestamp(convertStringToDate(pattern, strTs).getTime());
         } catch (ParseException pe) {
             pe.printStackTrace();
             throw new ParseException(pe.getMessage(), pe.getErrorOffset());
         }
-
         return t;
     }
 
@@ -234,36 +237,7 @@ public class DateUtil {
 
         return (returnValue);
     }
-    
-    
-    /**
-     * This method generates a string representation of a date's date/time
-     * in the format you specify on input
-     *
-     * @param date a date dd/MM/yyyy
-     * @return Date representation of the date
-     *
-     * @see java.text.SimpleDateFormat
-     */
-    public static final Date convertStringToDate(String date) {
-        
-        try {
-            //TODO: da testare prima di eliminare il new Date(...) deprecato
-//            GregorianCalendar a = new GregorianCalendar();
-//            a.set(Calendar.YEAR, Integer.parseInt(date.substring(6))-1900);
-//            a.set(Calendar.MONTH, Integer.parseInt(date.substring(3,5))-1);
-//            a.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date.substring(0,2)));
-//            return a.getTime();
-            return new Date(Integer.parseInt(date.substring(6))-1900, Integer.parseInt(date.substring(3,5))-1, Integer.parseInt(date.substring(0,2)) );
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        
-        
-    }
-    
-    
+
     // FUNZIONE PER LA CONVERSIONE DELLA DATA dal formato from al formato to
     public static String formatDate(String date, String fromPattern, String toPattern)
     {
@@ -279,7 +253,7 @@ public class DateUtil {
             return "";
         }
     }
-    
+
     /**
      * This method generates a string representation of a date/time
      * in the format you specify on input
@@ -320,8 +294,7 @@ public class DateUtil {
         }
         return output;
     }
-    
-    
+
     public static Integer getDaysInMonth(Calendar date, Integer year, Integer month) {
         Integer days = 0;
         if (null != date) {
@@ -335,8 +308,7 @@ public class DateUtil {
         }
         return days;
     }
-    
-    
+
     public static Integer getDayOfWeek(String date) {
         Integer day = null;
         if (!StringUtils.isEmpty(date)) {
@@ -352,7 +324,7 @@ public class DateUtil {
         }
         return day;
     }
-    
+
     public static Integer getMonth(String date) {
         Integer month = 0;
         if (!StringUtils.isEmpty(date)) {

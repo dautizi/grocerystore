@@ -10,4 +10,5 @@ public interface ItemDAO {
 
     public void delete(Item item);
 
+    public Item getById(long id);
 }

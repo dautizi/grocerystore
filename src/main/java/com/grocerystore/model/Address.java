@@ -2,46 +2,99 @@ package com.grocerystore.model;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Type;
+
+@Entity
+@Table(name="address")
 public class Address {
 
-    private Integer id;
-    private Integer idCustomer;
-    private String addressType;
+    @Id
+    @Column(name="id", unique=true, nullable=false)
+    private long id;
+
+    @Column(name = "id_customer", columnDefinition="long default '0'", nullable=false)
+    private long idCustomer;
+
+    @Column(name = "address_type", nullable=false, columnDefinition="int default '1'")
+    private int addressType;
+
+    @Column(name = "same_address", columnDefinition = "boolean default false", nullable=false)
     private boolean sameAddress;
+
+    @Column(name = "customer_default", columnDefinition = "boolean default false", nullable=false)
     private boolean customerDefault;
+
+    @Size(min=3, max=80)
+    @Column(name = "address_1", nullable=false)
     private String address1;
+
+    @Size(max=60)
+    @Column(name = "address_2", nullable=false)
     private String address2;
+
+    @Size(min=3, max=80)
+    @Column(name = "locality", nullable=false)
     private String locality;
+
+    @Size(min=3, max=50)
+    @Column(name = "province", nullable=false)
     private String province;
+
+    @Size(min=3, max=10)
+    @Column(name = "postcode", nullable=false)
     private String postcode;
+
+    @Size(min=3, max=50)
+    @Column(name = "country", nullable=false)
     private String country;
+
+    @Column(name = "prg", nullable=false, columnDefinition="int default '1'")
     private int prg;
 
+    @Type(type="timestamp")
+    @Column(name = "created_at", nullable=true)
     private Timestamp createdAt;
+    @Transient
     private String    createdAtFormat;
 
+    @Type(type="timestamp")
+    @Column(name = "updated_at", nullable=true)
     private Timestamp updatedAt;
+    @Transient
     private String    updatedAtFormat;
 
-    // default '1'
-    private int status;
+    @Column(name = "status", nullable=false, columnDefinition="int default '1'")
+    private int status; // default 1
 
-    public Integer getId() {
+    @ManyToOne
+    @JoinColumn(name="id", referencedColumnName="id", insertable=false, updatable=false)
+    private Customer customer;
+
+    public long getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
-    public Integer getIdCustomer() {
+    public long getIdCustomer() {
         return idCustomer;
     }
-    public void setIdCustomer(Integer idCustomer) {
+    public void setIdCustomer(long idCustomer) {
         this.idCustomer = idCustomer;
     }
-    public String getAddressType() {
+    public int getAddressType() {
         return addressType;
     }
-    public void setAddressType(String addressType) {
+    public void setAddressType(int addressType) {
         this.addressType = addressType;
     }
     public boolean isSameAddress() {
@@ -128,6 +181,12 @@ public class Address {
     public void setUpdatedAtFormat(String updatedAtFormat) {
         this.updatedAtFormat = updatedAtFormat;
     }
+    public Customer getCustomer() {
+        return customer;
+    }
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     @Override
     public String toString() {
@@ -139,8 +198,7 @@ public class Address {
                 + ", postcode=" + postcode + ", country=" + country + ", prg="
                 + prg + ", createdAt=" + createdAt + ", createdAtFormat="
                 + createdAtFormat + ", updatedAt=" + updatedAt
-                + ", updatedAtFormat=" + updatedAtFormat + ", status=" + status
-                + "]";
+                + ", updatedAtFormat=" + updatedAtFormat + ", status=" + status + "]";
     }
 
 }

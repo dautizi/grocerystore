@@ -15,59 +15,17 @@
 
     <properties>
         <copyright.year>2012</copyright.year>
-        <!-- spring.version>3.1.1.RELEASE</spring.version -->
         <junit.version>4.12</junit.version>
         <velocity.tools.version>2.0</velocity.tools.version>
         <spring.version>4.3.3.RELEASE</spring.version>
+        <hibernate.version>4.3.11.Final</hibernate.version>
+        <mysql.connector.version>5.1.34</mysql.connector.version>
         <org.slf4j.version>1.6.4</org.slf4j.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>central</id>
-            <url>http://repo1.maven.org/maven2</url>
-        </repository>
-        <repository>
-            <id>spring</id>
-            <url>http://repo1.maven.org/maven-spring</url>
-        </repository>
-        <repository>
-            <id>apache-repo-releases</id>
-            <name>Apache Release Repo</name>
-            <url>https://repository.apache.org/content/repositories/releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-    </repositories>
-
-<!-- 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.spring.platform</groupId>
-                <artifactId>platform-bom</artifactId>
-                <version>1.0.1.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
- -->
-
     <dependencies>
         <!-- Spring [BEGIN] -->
-        <!-- Spring framework -->
-        <!-- 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-         -->
-
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -129,13 +87,19 @@
             <version>2.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.0.5.RELEASE</version>
+        </dependency>
+
         <!-- Spring [END] -->
 
         <!-- Hibernate framework -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.3.11.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
 
         <!-- Hibernate library dependecy start -->
@@ -219,6 +183,12 @@
         </dependency>
 
         <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.9.4</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.owasp.esapi</groupId>
             <artifactId>esapi</artifactId>
             <version>2.0.1</version>
@@ -282,7 +252,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.34</version>
+            <version>${mysql.connector.version}</version>
         </dependency>
 
         <dependency>
@@ -295,7 +265,6 @@
             <artifactId>javax.mail</artifactId>
             <version>1.4.7</version>
         </dependency>
-
     </dependencies>
 
     <profiles>
@@ -337,14 +306,14 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat6-maven-plugin</artifactId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
                     <port>9090</port>

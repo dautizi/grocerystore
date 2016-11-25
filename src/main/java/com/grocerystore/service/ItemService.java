@@ -10,4 +10,5 @@ public interface ItemService {
 
     public void delete(Item item);
 
+    public Item getById(long id);
 }

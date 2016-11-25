@@ -40,4 +40,14 @@ public class ItemServiceImpl implements ItemService {
         itemDAO.delete(item);
     }
 
+    @Override
+    public Item getById(long id) {
+        Item item = null;
+        try {
+            item = itemDAO.getById(id);
+        } catch (Exception e) {
+            logger.error("Error " + e);
+        }
+        return item;
+    }
 }
